@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import Express from "express";
-import { createUSer } from "./src/controllers/controller.js";
+import { createUSer, getAllUser } from "./src/controllers/controller.js";
 
 dotenv.config();
 
@@ -18,6 +18,7 @@ server.get("/", (req, res) => {
 });
 
 server.post("/signUp", createUSer);
+server.get("/users", getAllUser);
 
 server.listen(3000, () => {
   console.log("Server is running on port 3000");
