@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import Express from "express";
-import { createUSer, getAllUser } from "./src/controllers/controller.js";
+import { createUser, getAllUser } from "./src/controllers/controller.js";
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ server.get("/", (req, res) => {
   return res.status(200).json({ message: "app working!" });
 });
 
-server.post("/signUp", createUSer);
+server.post("/signUp", createUser);
 server.get("/users", getAllUser);
 
 server.listen(3000, () => {
