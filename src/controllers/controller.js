@@ -33,12 +33,13 @@ export const validateUser = async (req, res) => {
     res.status(404).json({ error: "Email cannot be found" });
     return;
   }
+  const truepasw = validEmail.password;
 
-  const isPasswordValid = await bcrypt.compare(password, validEmail.password);
+  const isPasswordValid = password === validEmail.password;
 
   if (!isPasswordValid) {
-    res.status(401).json({ error: "Invalid password" });
-    return; // Exit the function if password is invalid
+    res.status(401).json({ error: { truepasw, password, isPasswordValid } });
+    return;
   }
 
   // If both email and password are valid, proceed with the login
