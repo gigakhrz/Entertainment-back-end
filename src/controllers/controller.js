@@ -24,6 +24,17 @@ export const createUser = async (req, res) => {
   }
 };
 
+export const validateUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  // check if this email is  registrered
+  const validEmail = await User.findOne({ email });
+  if (!validEmail) {
+    res.status(404).json({ error: "Email cannot be found" });
+    return;
+  }
+};
+
 export const getAllUser = async (req, res) => {
   try {
     const users = await User.find();
