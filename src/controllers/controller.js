@@ -71,3 +71,13 @@ export const postEntertainment = async (req, res) => {
     res.status(500).json({ error: "An error occurred" });
   }
 };
+
+export const getEntertainment = async (req, res) => {
+  try {
+    const entertainment = await Entertainment.find();
+    res.status(201).json(entertainment);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "An error occurred" });
+  }
+};
