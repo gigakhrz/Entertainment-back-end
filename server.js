@@ -6,6 +6,7 @@ import Express from "express";
 import {
   createUser,
   getAllUser,
+  postEntertainment,
   validateUser,
 } from "./src/controllers/controller.js";
 
@@ -24,6 +25,7 @@ server.get("/", (req, res) => {
 server.post("/signUp", createUser);
 server.get("/users", getAllUser);
 server.post("/validate", validateUser);
+server.post("/postData", postEntertainment);
 
 server.listen(3000, () => {
   console.log("Server is running on port 3000");

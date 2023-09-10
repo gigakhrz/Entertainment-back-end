@@ -1,5 +1,7 @@
 import User from "../models/Users.js";
+import Entertainment from "../models/Users.js";
 
+// N1 function
 export const createUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -24,6 +26,7 @@ export const createUser = async (req, res) => {
   }
 };
 
+// N2 function
 export const validateUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -46,11 +49,25 @@ export const validateUser = async (req, res) => {
   res.status(200).json({ message: "User logged in successfully" });
 };
 
+// N3 function
 export const getAllUser = async (req, res) => {
   try {
     const users = await User.find();
     res.status(201).json(users);
   } catch (error) {
+    res.status(500).json({ error: "An error occurred" });
+  }
+};
+
+// N4 function. to post data.json using postman
+export const postEntertainment = async (req, res) => {
+  try {
+    const data = req.body; // Assuming req.body is an array of objects
+
+    const result = await Entertainment.insertMany(data);
+    res.json(result);
+  } catch (error) {
+    console.log("Can't post");
     res.status(500).json({ error: "An error occurred" });
   }
 };
