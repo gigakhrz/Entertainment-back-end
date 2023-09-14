@@ -1,5 +1,16 @@
 import User from "../models/Users.js";
-import Entertainment from "../models/Users.js";
+import Entertainment from "../models/Entertainment.js";
+
+export const getEntertainmentData = async () => {
+  try {
+    const entertainment = await Entertainment.find();
+
+    return entertainment;
+  } catch (error) {
+    console.log(error);
+    throw new Error("An error occurred while fetching entertainment data");
+  }
+};
 
 // N1 function
 export const createUser = async (req, res) => {
@@ -13,10 +24,13 @@ export const createUser = async (req, res) => {
       return res.status(400).json({ error: "Email is already in use" });
     }
 
+    const entertainmentData = await getEntertainmentData();
+
     //save the information
     const newUser = new User({
       email,
       password,
+      entertainmentData: entertainmentData,
     });
 
     await newUser.save();
@@ -76,6 +90,7 @@ export const getEntertainment = async (req, res) => {
   try {
     const entertainment = await Entertainment.find();
     res.status(201).json(entertainment);
+    return entertainment;
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "An error occurred" });
