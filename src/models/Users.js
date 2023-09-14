@@ -1,25 +1,16 @@
 import { Schema, model } from "mongoose";
 
-const entertainmentSchema = new Schema({
-  title: String,
-  thumbnail: {
-    trending: {
-      small: String,
-      large: String,
-    },
-    regular: {
-      small: String,
-      medium: String,
-      large: String,
-    },
+const usersSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
   },
-  year: Number,
-  category: String,
-  rating: String,
-  isBookmarked: Boolean,
-  isTrending: Boolean,
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
-const Entertainment = model("Entertainment", entertainmentSchema);
+const User = model("users", usersSchema);
 
-export default Entertainment;
+export default User;
