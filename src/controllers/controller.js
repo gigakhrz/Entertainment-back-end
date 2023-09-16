@@ -5,7 +5,7 @@ export const getEntertainmentData = async () => {
   try {
     const entertainment = await Entertainment.find();
 
-    return entertainment;
+    return entertainment.json();
   } catch (error) {
     console.log(error);
     throw new Error("An error occurred while fetching entertainment data");
@@ -64,10 +64,14 @@ export const validateUser = async (req, res) => {
 };
 
 // N3 function
-export const getAllUser = async (req, res) => {
+export const getUser = async (req, res) => {
   try {
-    const users = await User.find();
-    res.status(201).json(users);
+    const userEmail = req.query.email;
+    const user = await User.findOne({ email: userEmail }, "entertainmentData"); // Only fetch 'entertainmentData'
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(200).json(user.entertainmentData);
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });
   }

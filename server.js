@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import Express from "express";
 import {
   createUser,
-  getAllUser,
+  getUser,
   getEntertainment,
   postEntertainment,
   validateUser,
@@ -24,7 +24,7 @@ server.get("/", (req, res) => {
 });
 
 server.post("/signUp", createUser);
-server.get("/users", getAllUser);
+server.get("/user", getUser);
 server.post("/validate", validateUser);
 server.post("/postData", postEntertainment);
 server.get("/getEntertainment", getEntertainment);
