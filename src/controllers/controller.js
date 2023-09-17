@@ -100,3 +100,38 @@ export const getEntertainment = async (req, res) => {
     res.status(500).json({ error: "An error occurred" });
   }
 };
+
+//change isbookarked value in user's database
+
+export const changeBookmark = async (req, res) => {
+  try {
+    const userEmail = req.params.email; // Assuming you want to use req.params.email
+    const id = req.params.id;
+    const { isBookmarked } = req.body;
+
+    // Find the user by email
+    const user = await User.findOne({ email: userEmail });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Find the entertainment item by id
+    const entertainmentItem = user.entertainmentData.id(id);
+
+    if (!entertainmentItem) {
+      return res.status(404).json({ error: "Entertainment item not found" });
+    }
+
+    // Update the isBookmarked property
+    entertainmentItem.isBookmarked = isBookmarked;
+
+    // Save the user with the updated entertainmentData
+    await user.save();
+
+    res.json({ message: "Bookmark updated successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Couldn't update data" });
+  }
+};

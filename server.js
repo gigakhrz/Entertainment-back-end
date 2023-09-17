@@ -9,6 +9,7 @@ import {
   getEntertainment,
   postEntertainment,
   validateUser,
+  changeBookmark,
 } from "./src/controllers/controller.js";
 
 dotenv.config();
@@ -28,6 +29,7 @@ server.get("/user", getUser);
 server.post("/validate", validateUser);
 server.post("/postData", postEntertainment);
 server.get("/getEntertainment", getEntertainment);
+server.put("/updateBookmarked", changeBookmark);
 
 server.listen(3000, () => {
   console.log("Server is running on port 3000");
