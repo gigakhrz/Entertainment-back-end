@@ -29,7 +29,7 @@ server.get("/user", getUser);
 server.post("/validate", validateUser);
 server.post("/postData", postEntertainment);
 server.get("/getEntertainment", getEntertainment);
-server.put("/updateBookmarked", changeBookmark);
+server.put("/updateBookmarked/:email/:id", changeBookmark);
 
 server.listen(3000, () => {
   console.log("Server is running on port 3000");
