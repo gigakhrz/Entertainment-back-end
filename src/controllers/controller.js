@@ -1,11 +1,14 @@
 import User from "../models/Users.js";
 import Entertainment from "../models/Entertainment.js";
 
-export const getEntertainmentData = async () => {
+const getEntertainmentData = async () => {
   try {
     const entertainment = await Entertainment.find();
 
-    return entertainment.json();
+    // Convert each document to JSON
+    const entertainmentJSON = entertainment.map((doc) => doc.toJSON());
+
+    return entertainmentJSON;
   } catch (error) {
     console.log(error);
     throw new Error("An error occurred while fetching entertainment data");
