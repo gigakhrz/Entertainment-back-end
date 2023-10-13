@@ -21,7 +21,7 @@ server.use(cors());
 server.use(bodyParser.json());
 
 server.get("/", (req, res) => {
-  return res.status(200).json({ message: "app working!" });
+  return res.status(200).json({ message: "app working !" });
 });
 
 server.post("/signUp", createUser);
