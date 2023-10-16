@@ -15,7 +15,7 @@ const getEntertainmentData = async () => {
   }
 };
 
-// N1 function
+// N1 function that creating user and saving in data
 export const createUser = async (req, res) => {
   try {
     const { email, password } = req.body;
